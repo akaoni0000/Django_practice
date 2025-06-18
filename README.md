@@ -49,3 +49,6 @@ python3 manage.py migrate
 ```xml
 import pdb; pdb.set_trace()
 ```
+
+## アプリ作成後の設定
+setting.pyを編集する。詳しくはsetting.pyを参照。
