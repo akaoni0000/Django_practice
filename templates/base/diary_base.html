@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>サプーの日記</title>
+    </head>
+    <body>
+        <h1><a href="{% url 'diary:index' %}">サプーの日記</a></h1>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
