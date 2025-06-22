@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram UI Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: white;
+    }
+    .sidebar {
+      width: 270px;
+      min-height: 100vh;
+      background: #fafafa;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+      position: fixed;
+	  transition: width 0.3s ease, padding 0.3s ease;
+    }
+    .sidebar img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .story-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #e1306c;
+      padding: 2px;
+    }
+    .feed-img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .content-area {
+      margin-left: 300px;
+      padding: 20px;
+	  transition: margin-left 0.3s ease;
+    }
+	.center {
+		text-align: center;
+	}
+	.sidebar.closed {
+		width: 60px;
+		padding: 20px 5px;
+		overflow: hidden;
+		border: none;
+	}
+	.content-area.sidebar-closed {
+		margin-left: 70px;
+	}
+	#toggleSidebarBtn {
+		position: absolute;
+		top: 10px;
+		left: 10px;   /* 左側に固定 */
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		font-size: 20px;
+		z-index: 10;  /* ボタンが手前に出る */
+	}
+	.display_none {
+ 		 display: none !important;
+	}
+	.profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .story-img, .recommend-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+	<div class="sidebar">
+		<button id="toggleSidebarBtn" class="btn btn-sm btn-outline-secondary mb-3">×</button>
+		<div class="side_content">
+			<div class="" style="margin-top: 50px; margin-bottom: 55px;">
+				<h1 class="center" style="font-size: 40px;">sample sns</h1>
+			</div>
+			<div class="text-center mb-4">
+				<img src="/media/diary/picture/sample2.jpg" alt="User">
+				<h6 class="mt-2">@username</h6>
+				<div class="d-flex justify-content-between mt-2">
+					<div><strong>46</strong><br>Posts</div>
+					<div><strong>2.8k</strong><br>Followers</div>
+					<div><strong>526</strong><br>Following</div>
+				</div>
+			</div>
+			<ul class="nav flex-column">
+				<li class="nav-item"><a class="nav-link active" href="#">📸 Feed</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">🔍 Explore</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">🔔 Notifications</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">💬 Messages</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">📈 Stats</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">⚙️ Settings</a></li>
+				<li class="nav-item"><a class="nav-link text-danger" href="{% url 'diary:user_login' %}">戻る</a></li>
+				<li class="nav-item"><a class="nav-link text-danger" href="#">🚪 Logout</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="content-area">
+
+
+
+			<div class="d-flex justify-content-between align-items-center" style=" margin: 20px auto; margin-bottom: 50px; padding-right: 55px;">
+  
+			<!-- 検索フォーム -->
+			<form class="d-flex align-items-center gap-2" role="search">
+				<div class="input-group">
+				<span class="input-group-text bg-white border-end-0">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="bi bi-search" viewBox="0 0 16 16">
+					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+					</svg>
+				</span>
+				<input class="form-control border-start-0" type="search" placeholder="Search..." aria-label="Search" />
+				</div>
+				<button class="btn btn-dark rounded-pill px-4" type="submit">Search</button>
+			</form>
+
+			<!-- Add Photo ボタン -->
+			<button class="btn btn-dark rounded-pill" type="button">Add Photo</button>
+			</div>
+
+
+		
+
+		</form>
+		<!-- Stories -->
+		<h2>Follow User</h2>
+		<div class="d-flex mb-4">
+			<div class="me-3 text-center"><img src="/media/diary/picture/sample.jpg" class="story-avatar"><div>Me</div></div>
+			<div class="me-3 text-center"><img src="/media/diary/picture/sample.jpg" class="story-avatar"><div>Alex</div></div>
+			<div class="me-3 text-center"><img src="/media/diary/picture/sample.jpg" class="story-avatar"><div>Jane</div></div>
+			<div class="me-3 text-center"><img src="/media/diary/picture/sample.jpg" class="story-avatar"><div>John</div></div>
+		</div>
+
+		<!-- Feed -->
+		<h2>Posts</h2>
+		<div class="row g-4">
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>Dum.Hill</strong> ❤️ 5.2k 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 546 💬 38</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample2.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+			<div class="" style="width:250px">
+				<img src="/media/diary/picture/sample.jpg" class="feed-img">
+				<p><strong>John.Kelson</strong> ❤️ 566 💬 36</p>
+			</div>
+		</div>
+	</div>
+<script>
+  const sidebar = document.querySelector('.sidebar');
+  const contentArea = document.querySelector('.content-area');
+  const toggleBtn = document.getElementById('toggleSidebarBtn');
+  const sideContent = document.querySelector('.side_content');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('closed');
+    contentArea.classList.toggle('sidebar-closed');
+
+	// side_contentの表示非表示切り替え
+  	sideContent.classList.toggle('display_none');
+
+    // ボタンのテキスト切替（×と☰）
+    if (sidebar.classList.contains('closed')) {
+      toggleBtn.textContent = '☰';  // 閉じてる状態はメニューアイコン表示
+
+    } else {
+      toggleBtn.textContent = '×';  // 開いてる状態は閉じるアイコン表示
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

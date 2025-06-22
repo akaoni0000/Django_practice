@@ -14,11 +14,25 @@ class Page(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
 
-    def __str__(self):
-        return self.title
+    def __str__(self):#shellでPageオブジェクトの何かを出力するときに 下の値を返す
+        #return self.title
+        return f"{self.id} - {self.title}"
     
     def delete(self, *args, **kwargs):
         picture = self.picture
         super().delete(*args, **kwargs)
         if picture:
             Path(picture.path).unlink(missing_ok=True)
+
+
+class MyUser(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+
+class Good(models.Model):
+    id = models.AutoField(primary_key=True)
+    my_user_id = models.ForeignKey(MyUser, on_delete=models.CASCADE,blank=True, null=True)
+    page_id = models.ForeignKey(Page, on_delete=models.CASCADE,blank=True, null=True,)
+    

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "diary.apps.DiaryConfig"#追加 アプリを作成するたびに追加する
+    "diary.apps.DiaryConfig",#追加 アプリを作成するたびに追加する
 ]
 
 MIDDLEWARE = [
@@ -122,6 +122,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = BASE_DIR / "media"#画像機能のために追加
+MEDIA_ROOT = BASE_DIR / "media"#画像機能のために追加 画像が保存される場所を示す
 
-MEDIA_URL = "/media/"#画像機能のために追加
+MEDIA_URL = "/media/"#画像機能のために追加 ブラウザからアクセスするときのURLを示す

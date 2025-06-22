@@ -1,0 +1,6 @@
+<p>{{ page.good_count }}</p>
+{% if good_or_delete %}
+    <a href="{% url 'diary:good_delete' page.id%}" class="btn btn-primary favorite_button">いいねをキャンセル</a>
+{% else %}
+    <a href="{% url 'diary:good' page.id%}" class="btn btn-primary favorite_button">いいね</a>
+{% endif %}
