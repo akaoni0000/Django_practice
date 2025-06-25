@@ -35,4 +35,12 @@ class Good(models.Model):
     id = models.AutoField(primary_key=True)
     my_user_id = models.ForeignKey(MyUser, on_delete=models.CASCADE,blank=True, null=True)
     page_id = models.ForeignKey(Page, on_delete=models.CASCADE,blank=True, null=True,)
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    body = models.TextField(max_length=2000, verbose_name="本文")
+    my_user_id = models.ForeignKey(MyUser, on_delete=models.CASCADE,blank=True, null=True,)
+    page_id = models.ForeignKey(Page, on_delete=models.CASCADE,blank=True, null=True,)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
     

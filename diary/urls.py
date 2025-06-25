@@ -19,4 +19,8 @@ urlpatterns = [
 
     path("user/test/", views.test, name="test_page"),
     path("user/test2/", views.test2, name="test2_page"),
+
+    path("page/show/", views.page_show, name="page_show"),
+
+    path("page/comment/", views.comment, name="comment"),
 ]
